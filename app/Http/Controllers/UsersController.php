@@ -3,7 +3,7 @@
 namespace P3\Http\Controllers;
 
 use P3\Http\Controllers\Controller;
-
+use Illuminate\Http\Request;
 use Barryvdh\Debugbar\Facade as Debugbar;
 
 class UsersController extends Controller {
@@ -58,5 +58,12 @@ class UsersController extends Controller {
     }
 
     return view('users.generate')->with('names', $names);
+  }
+
+  function build(Request $request) {
+
+    $count = $request->input('count');
+
+    return $this->generate($count, 2);
   }
 }

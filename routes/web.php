@@ -19,6 +19,8 @@ Route::get('/lorem/{count}', 'LoremController@generate')->name('lorem.generate')
 
 Route::get('/users/{count}/{genderFlag}', 'UsersController@generate')->name('users.generate');
 
+Route::post('/users/generate', 'UsersController@build')->name('users.build');
+
 // Route::get('/users/{count}', function($count) {
 //     $males = file('./txt/male_names.txt');
 //     $females = file('./txt/female_names.txt');
