@@ -21,8 +21,6 @@ Route::get('/lorem/{count}', function($count) {
     for ($i = 0; $i <= $count; $i++) {
       $output .= "<p>".$lines[$i]."</p>";
     }
-    // foreach ($lines as $line_num => $line) {
-    //     $output .= "<p>".$line."</p>";
-    // }
+
     return $output;
 });
