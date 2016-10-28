@@ -46,7 +46,7 @@ Route::get('/users/{count}', function($count) {
       $r = mt_rand(0, count($surnames)-1);
       $output.=trim($surnames[$r]);
 
-      // Suffix (odd: 1 in 50);
+      // Suffix? (odd: 1 in 50);
 
       // Next
       $output.="<br/>";
