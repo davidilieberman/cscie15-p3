@@ -5,6 +5,7 @@ namespace P3\Http\Controllers;
 use P3\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Barryvdh\Debugbar\Facade as Debugbar;
+use phootwork\collection\ArrayList as ArrayList;
 
 class UsersController extends Controller {
 
@@ -33,6 +34,15 @@ class UsersController extends Controller {
     $output .= trim($this->component($firstNames))." ";
     $output .= trim($this->component($lastNames));
     return $this->decorator($suffixes, 50, $output);
+  }
+
+  function buildUserObj($prefixes, $firstNames, $lastNames, $suffixes) {
+    $u = array();
+    $u['prefix'] = $this->decorator($prefixes, 20, "");
+    $u['firstName'] = $this->component($firstNames);
+    $u['lastName'] = $this->component($lastNames);
+    $u['suffix'] = $this->decorator($suffixes, 50, "");
+    return $u;
   }
 
   /**
@@ -74,6 +84,7 @@ class UsersController extends Controller {
 
     // Instantiate the array of names we'll create
     $names = array();
+    $users = new ArrayList();
 
     // Iterate the user creation process for the requested number of times
     for ($i=0; $i<$count; $i++) {
@@ -98,7 +109,26 @@ class UsersController extends Controller {
       // Create the user and push the user into the output array
       array_push($names, $this->buildUser($prefixes, $firstNames, $surnames, $suffixes));
 
+      $users->add($this->buildUserObj($prefixes, $firstNames, $surnames, $suffixes));
+
     }
+
+    Debugbar::info("UsersContoller.generateUsers users has " . $users->size()
+      . " elements");
+
+    $sortedUsers = $users->sort(function($a, $b) {
+      if ($a["lastName"] == $b["lastName"]) {
+        if ($a["firstName"] == $b["firstName"]) {
+          return 0;
+        }
+        return ($a["firstName"] < $b["firstName"]) ? -1 : 1;
+      }
+      return ($a["lastName"] < $b["lastName"]) ? -1 : 1;
+    });
+
+    Debugbar::info("UsersController.generateUsers sortedUsers has "
+      . $sortedUsers->size() . " elements");
+    DebugBar::info($sortedUsers);
 
     // Pass the list of generated users and the form input values to the
     // template
