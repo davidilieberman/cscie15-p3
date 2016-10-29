@@ -57,13 +57,26 @@ class UsersController extends Controller {
 
     }
 
-    return view('users.generate')->with('names', $names);
+    return view('users.generate')
+      ->with('names', $names)
+      ->with('count', $count)
+      ->with('genderFlag', $genderFlag);
   }
 
   function build(Request $request) {
 
+    $this->validate($request, [
+      'count' => 'required|numeric'
+    ]);
+
+
     $count = $request->input('count');
 
+
     return $this->generate($count, 2);
+  }
+
+  function index() {
+    return view('users.generate');
   }
 }
