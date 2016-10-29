@@ -17,7 +17,10 @@ Route::get('/', function () {
 
 Route::get('/lorem/{count}', 'LoremController@generate')->name('lorem.generate');
 
-Route::get('/users/{count}/{genderFlag}', 'UsersController@generate')->name('users.generate');
+Route::get('/users', 'UsersController@index')->name('users.index'); 
+
+Route::get('/users/{count}/{genderFlag}', 'UsersController@generate')
+  ->name('users.generate');
 
 Route::post('/users/generate', 'UsersController@build')->name('users.build');
 
