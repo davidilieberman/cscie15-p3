@@ -28,14 +28,6 @@ class UsersController extends Controller {
   Given gender-specific arrays of prefixes, first names, and suffixes,
   and an array of last names, create a new user.
   */
-  function buildUser($prefixes, $firstNames, $lastNames, $suffixes) {
-    $output = "";
-    $output = $this->decorator($prefixes, 20, $output);
-    $output .= trim($this->component($firstNames))." ";
-    $output .= trim($this->component($lastNames));
-    return $this->decorator($suffixes, 50, $output);
-  }
-
   function buildUserObj($prefixes, $firstNames, $lastNames, $suffixes) {
     $u = array();
     $u['prefix'] = $this->decorator($prefixes, 20, "");
@@ -62,6 +54,21 @@ class UsersController extends Controller {
       $output .= $this->component($decorators);
     }
     return $output;
+  }
+
+  function userObjToString($user) {
+    return trim($user["prefix"])." "
+            .trim($user["firstName"])." "
+            .trim($user["lastName"])
+            .$user["suffix"];
+  }
+
+  function usersListToArray($users) {
+    $arr = array();
+    foreach ($users as $user) {
+      array_push($arr, $this->userObjToString($user));
+    }
+    return $arr;
   }
 
   /**
@@ -91,8 +98,6 @@ class UsersController extends Controller {
 
       // For each user, define a gender
       $gender = ($genderFlag < 2 ? $genderFlag : mt_rand(0,100) % 2);
-      Debugbar::info("UsersController.generate: genderFlag " .$genderFlag
-        . " yielded gender " .$gender);
 
       // Now that we have a gender, gather the appropriate source lists
       // - merge the gender neutral prefixes with those peculiar to the gender
@@ -106,16 +111,12 @@ class UsersController extends Controller {
       $suffixes = array_collapse([$this->neutralSuffixes,
         ($gender ? $this->maleSuffixes : $this->femaleSuffixes)]);
 
-      // Create the user and push the user into the output array
-      array_push($names, $this->buildUser($prefixes, $firstNames, $surnames, $suffixes));
-
+      // Create the user and add it to the list
       $users->add($this->buildUserObj($prefixes, $firstNames, $surnames, $suffixes));
 
     }
 
-    Debugbar::info("UsersContoller.generateUsers users has " . $users->size()
-      . " elements");
-
+    // Sort users on last name, first name
     $sortedUsers = $users->sort(function($a, $b) {
       if ($a["lastName"] == $b["lastName"]) {
         if ($a["firstName"] == $b["firstName"]) {
@@ -126,14 +127,14 @@ class UsersController extends Controller {
       return ($a["lastName"] < $b["lastName"]) ? -1 : 1;
     });
 
-    Debugbar::info("UsersController.generateUsers sortedUsers has "
-      . $sortedUsers->size() . " elements");
-    DebugBar::info($sortedUsers);
+
+    // Convert the list of users to an array of strings
+    $arr = $this->usersListToArray($sortedUsers);
 
     // Pass the list of generated users and the form input values to the
     // template
     return view('users.generate')
-      ->with('names', $names)
+      ->with('names', $arr)
       ->with('count', $count)
       ->with('genderOptions', $this->genderOptions($genderFlag));
   }
