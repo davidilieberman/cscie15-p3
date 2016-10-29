@@ -26,16 +26,17 @@
   > <br/>
   <label for="genderFlag">Gender of Users:</label>
   <select name="genderFlag">
-    <option value="2"
-        @if ( isset($genderFlag) && $genderFlag==2) checked @endif
-      >Both</option>
-    <option value="0"
-        @if ( isset($genderFlag) && $genderFlag==0) checked @endif
-      >Female Only</option>
-    <option value="1"
-        @if ( isset($genderFlag) && $genderFlag==1) checked @endif
-      >Male Only</option>
-  </select>
+    @if ( isset($genderOptions) )
+      @foreach ( $genderOptions as $opt)
+        <option value="{{ $opt["value"] }}"
+          @if ( $opt["selected"]) selected @endif>{{ $opt["label"] }}</option>
+      @endforeach
+    @else
+      <option value="2">Both</option>
+      <option value="0">Male only</option>
+      <option value="1">Female only</option>
+    @endif
+  </select><br/>
   <input type="submit" value="Create Users"/>
 </form>
 
