@@ -134,7 +134,7 @@ class UsersController extends Controller {
   function generate(Request $request) {
 
     $this->validate($request, [
-      'count' => 'required|numeric|min:1|max:99'
+      'count' => 'required|numeric|min:1|max:99',
       'genderFlag' => 'required|numeric|min:0|max:2'
     ]);
 

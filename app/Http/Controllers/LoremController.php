@@ -3,17 +3,34 @@
 namespace P3\Http\Controllers;
 
 use P3\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Barryvdh\Debugbar\Facade as Debugbar;
 
 class LoremController extends Controller {
 
-  function generate($count) {
+  function generate(Request $request) {
+
+    $this->validate($request, [
+      'count' => 'required|numeric|min:1|max:99'
+    ]);
+
+    $count = $request->input('count');
     $lines = file('./txt/lorem.txt');
-    $output = "";
-    for ($i = 0; $i <= $count; $i++) {
-      $output .= "<p>".$lines[$i]."</p>";
+
+    $arr = array();
+    //$output = "";
+    for ($i = 0; $i <= $count-1; $i++) {
+      //$output .= "<p>".$lines[$i]."</p>";
+      array_push($arr, $lines[$i]);
     }
 
-    return $output;
+    return view('lorem.generate')
+      ->with('loremGraphs', $arr)
+      ->with('count', $count);
+  }
+
+  function index() {
+    return view('lorem.generate');
   }
 
 }

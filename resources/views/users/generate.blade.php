@@ -1,20 +1,10 @@
 @extends('layouts.master')
 
 @section('title')
-: User Generator
+User Generator
 @endsection
 
 @section('content')
-
-@if (count($errors) > 0)
-  <div>
-    <ul>
-      @foreach ($errors->all() as $error)
-        <li>{{ $error }}</li>
-      @endforeach
-    </ul>
-  </div>
-@endif
 
 <form method="POST" action="/users/generate" >
   {{ csrf_field() }}

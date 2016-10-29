@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>
-    Developer's Best Friend @yield('title')
+    Developer's Best Friend : @yield('title')
   </title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
@@ -12,8 +12,21 @@
 
 </head>
 <body>
-  <header>
 
+  @if (count($errors) > 0)
+    <div>
+      <ul>
+        @foreach ($errors->all() as $error)
+          <li>{{ $error }}</li>
+        @endforeach
+      </ul>
+    </div>
+  @endif
+
+
+  <header>
+    <h2>Developer's Best Friend</h2>
+    <h3>@yield('title')</h3>
   </header>
 
   <section>
