@@ -11,10 +11,10 @@ class LoremController extends Controller {
   function generate(Request $request) {
 
     $this->validate($request, [
-      'count' => 'required|numeric|min:1|max:99'
+      'loremCount' => 'required|numeric|min:1|max:99'
     ]);
 
-    $count = $request->input('count');
+    $count = $request->input('loremCount');
     $lines = file('./txt/lorem.txt');
 
     $arr = array();

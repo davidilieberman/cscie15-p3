@@ -99,6 +99,24 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'userCount' => [
+          'numeric' => 'The number of users must be, well, a number.',
+          'required' => 'Please specify the number of users to generate.',
+          'min' => 'The number of users to generate must be greater than zero.',
+          'max' => 'You may only generate up to ninety-nine users.',
+        ],
+        'genderFlag' => [
+          'required' => 'Please specify whether you wish to generate male users, female users, or a judicious mix.',
+          'numeric' => 'The valid gender options are: 0 - Female users; 1 - Male users; 2 - Mix of female and male users.',
+          'min' => 'The valid gender options are: 0 - Female users; 1 - Male users; 2 - Mix of female and male users.',
+          'max' => 'The valid gender options are: 0 - Female users; 1 - Male users; 2 - Mix of female and male users.',
+        ],
+        'loremCount' => [
+          'required' => 'Please specify the number of paragraphs to generate.',
+          'numeric' => 'The number of paragraphs to generate must be, well, a number.',
+          'min' => 'I can\'t generate fewer paragraphs than one -- sorry!',
+          'max' => 'Very sorry, but I can\'t generate more than ninety-nine paragraphs.',
+        ]
     ],
 
     /*

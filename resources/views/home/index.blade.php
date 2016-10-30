@@ -14,7 +14,7 @@ to make use of these one-of-a-kind features:
 
 <ul>
   <li><a href="/lorem">Lorem Ipsum Generator</a>: create up to 99 paragraphs of
-    text unintelligible to anyone but the most skilled Latin scholar.</li>
+    text unintelligible to anyone but the most learned Latin scholar.</li>
   <li><a href="/users">User Generator</a>: create up to 99 dummy users for your
     application. Create male users, female users, or a random combination of
     male and female users -- your choice!

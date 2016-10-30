@@ -8,8 +8,8 @@ User Generator
 
 <form method="POST" action="/users/generate" >
   {{ csrf_field() }}
-  <label for="count">Number of Users: </label>
-  <input type="text" name="count" size="2"
+  <label for="userCount">Number of Users: </label>
+  <input type="text" name="userCount" size="2"
     @if ( isset($count) )
       value="{{ $count }}"
     @endif

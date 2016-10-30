@@ -11,6 +11,14 @@ div#navbar {
   text-align: right;
 }
 
+div.error {
+  width:100%;
+  margin:0;
+  padding:12px;
+  color:red;
+  font-weight: bold;
+}
+
 div.results {
   overflow-y:auto;
   height:58vh;

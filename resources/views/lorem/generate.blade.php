@@ -7,8 +7,8 @@ Lorem Ipsum Generator
 @section('content')
 <form method="POST" action="/lorem/generate">
   {{ csrf_field() }}
-  <label for="count">Number of paragraphs</label>
-  <input type="text" size="2" name="count"
+  <label for="loremCount">Number of paragraphs</label>
+  <input type="text" size="2" name="loremCount"
     @if ( isset ( $count) ) value="{{ $count }}" @endif
     />
   <input type="submit" value="Generate Lorem Ipsum Text"/>
