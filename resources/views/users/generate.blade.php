@@ -13,7 +13,7 @@ User Generator
     @if ( isset($count) )
       value="{{ $count }}"
     @endif
-  > <br/>
+  >
   <label for="genderFlag">Gender of Users:</label>
   <select name="genderFlag">
     @if ( isset($genderOptions) )
@@ -26,16 +26,21 @@ User Generator
       <option value="0">Male only</option>
       <option value="1">Female only</option>
     @endif
-  </select><br/>
+  </select>
   <input type="submit" value="Create Users"/>
 </form>
 
-  @if ( isset($names) )
-  <div>
-    @foreach ($names as $name)
-    {{ $name }}<br/>
-    @endforeach
-  </div>
+  @if ( isset($users))
+
+    <h4>Your Users:</h4>
+    <div class="results">
+
+     @foreach ($users as $user)
+      <p>{{$user["prefix"]}} {{trim($user["firstName"])}}
+          {{ trim($user["lastName"]).$user["suffix"] }}
+
+     @endforeach
+    </div>
   @endif
 
 @endsection

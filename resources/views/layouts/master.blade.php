@@ -12,32 +12,41 @@
 
 </head>
 <body>
+  <div id="navbar">
+    <a href="/">Home</a> ||
+    <a href="/lorem">Lorem Ipsum Generator</a> ||
+    <a href="/users">User Generator</a>
+  </div>
 
-  @if (count($errors) > 0)
-    <div>
-      <ul>
-        @foreach ($errors->all() as $error)
-          <li>{{ $error }}</li>
-        @endforeach
-      </ul>
-    </div>
-  @endif
+    @if (count($errors) > 0)
+      <div>
+        <ul>
+          @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+          @endforeach
+        </ul>
+      </div>
+    @endif
 
 
-  <header>
-    <h2>Developer's Best Friend</h2>
-    <h3>@yield('title')</h3>
-  </header>
+    <header>
+      <h2>Developer's Best Friend</h2>
+      <h3>@yield('title')</h3>
+    </header>
 
-  <section>
-    @yield('content')
-  </section>
+    <section>
+      @yield('content')
+    </section>
 
-  <footer>
-  &copy; {{ date('Y') }}
-  </footer>
+    <footer>
+      <div class="copy">
+        &copy; David Lieberman, {{ date('Y') }}
+      </div>
+    </footer>
 </body>
 
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+    integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    crossorigin="anonymous"></script>
 
 </html>

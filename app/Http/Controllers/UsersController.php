@@ -56,21 +56,6 @@ class UsersController extends Controller {
     return $output;
   }
 
-  function userObjToString($user) {
-    return trim($user["prefix"])." "
-            .trim($user["firstName"])." "
-            .trim($user["lastName"])
-            .$user["suffix"];
-  }
-
-  function usersListToArray($users) {
-    $arr = array();
-    foreach ($users as $user) {
-      array_push($arr, $this->userObjToString($user));
-    }
-    return $arr;
-  }
-
   /**
   Generate an array of users in the number specified as $count and
   of the gender specified by $genderFlag.
@@ -90,7 +75,7 @@ class UsersController extends Controller {
     $surnames = file('./txt/last_names.txt');
 
     // Instantiate the array of names we'll create
-    $names = array();
+    //$names = array();
     $users = new ArrayList();
 
     // Iterate the user creation process for the requested number of times
@@ -128,13 +113,10 @@ class UsersController extends Controller {
     });
 
 
-    // Convert the list of users to an array of strings
-    $arr = $this->usersListToArray($sortedUsers);
-
     // Pass the list of generated users and the form input values to the
     // template
     return view('users.generate')
-      ->with('names', $arr)
+      ->with('users', $sortedUsers)
       ->with('count', $count)
       ->with('genderOptions', $this->genderOptions($genderFlag));
   }

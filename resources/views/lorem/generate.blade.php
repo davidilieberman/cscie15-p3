@@ -15,11 +15,14 @@ Lorem Ipsum Generator
 </form>
 
 @if ( isset($loremGraphs))
-  @foreach ( $loremGraphs as $graph )
-<p>
-  {{ $graph }}
-</p>
-  @endforeach
+  <h4>Your Lorem Ipsum Text</h4>
+  <div class="results">
+    @foreach ( $loremGraphs as $graph )
+      <p>
+        {{ $graph }}
+      </p>
+    @endforeach
+  </div>
 @endif
 
 @endsection
