@@ -5,7 +5,7 @@ Lorem Ipsum Generator
 @endsection
 
 @section('content')
-<form method="POST" action="/lorem/generate">
+<form method="POST" action="/lorem">
   {{ csrf_field() }}
   <label for="loremCount">Number of paragraphs</label>
   <input type="text" size="2" name="loremCount"

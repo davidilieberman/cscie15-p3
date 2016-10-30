@@ -6,7 +6,7 @@ User Generator
 
 @section('content')
 
-<form method="POST" action="/users/generate" >
+<form method="POST" action="/users" >
   {{ csrf_field() }}
   <label for="userCount">Number of Users: </label>
   <input type="text" name="userCount" size="2"
